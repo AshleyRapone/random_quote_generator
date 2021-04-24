@@ -8,13 +8,14 @@ project 1 - A Random Quote Generator
   // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
 /*** 
- * `quotes` array 
+ * `quotes` array - Holds objects that represent a quote with details
 ***/
 let quotes = [
                 { quote: "A mind needs books as a sword needs a whetstone, if it is to keep its edge.",
                   source: "Tyrion Lannister",
                   citation: "Game of Thrones",
-                  year: 2011 }, 
+                  year: 2011,
+                  season: 6 }, 
                 { quote: "People often claim to hunger for truth, but seldom like the taste when it's served up.",
                   source: "Tyrion Lannister",
                   citation: "Game of Thrones" }, 
@@ -29,7 +30,7 @@ let quotes = [
                   citation: "Game of Thrones" }
 ]
 /***
- * `getRandomQuote` function
+ * `getRandomQuote` function - Returns a random quote
 ***/
 function getRandomQuote() {
   let quotesLength = quotes.length;
@@ -38,7 +39,7 @@ function getRandomQuote() {
 }
 
 /***
- * `printQuote` function
+ * `printQuote` function - Returns the html element containing the quote information as well as the background color
 ***/
 function printQuote() {
   let randomQuote = getRandomQuote();
@@ -49,13 +50,26 @@ function printQuote() {
   if (randomQuote.year) {
     html += `<span class="year"> ${ randomQuote.year } </span>`;
   }
+  if (randomQuote.season) {
+    html += `<span class="year">  Season ${ randomQuote.season } </span>`;
+  }
   html += '</p>'
+  document.body.style.backgroundColor = `rgb(${getRandomColor()[0]}, ${getRandomColor()[1]}, ${getRandomColor()[2]})`;
   return document.getElementById('quote-box').innerHTML = html;
 }
 
-
 /***
- * click event listener for the print quote button
+ * `getRandomColor` function - Returns red, green and blue numerical values in an array
+***/
+function getRandomColor() {
+  let red = Math.floor(Math.random() * 256);
+  let green = Math.floor(Math.random() * 256);
+  let blue = Math.floor(Math.random() * 256);
+  return [red, green, blue]
+}
+ 
+/***
+ * click event listener for the print quote button - once the button is pressed the background and the quote information changes
  * DO NOT CHANGE THE CODE BELOW!!
 ***/
 
